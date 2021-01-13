@@ -178,3 +178,115 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 
+
+
+
+/**
+ * Creacion de custom endpoint para que las tablas de clientes sean accesibles de la API Rest
+ */
+
+
+//Tabla ps_customer
+function customer_endpoint() {
+    register_rest_route( 'v2', 'customers', array(
+        'methods'  => WP_REST_Server::READABLE,
+        'callback' => 'get_customers',
+    ) );
+}
+
+add_action( 'rest_api_init', 'customer_endpoint' );
+
+function get_customers( $request ) {
+	global $wpdb;
+    
+	$table = 'ps_customer';
+	$sql = "SELECT * FROM $table";
+	$result = $wpdb->get_results( $wpdb->prepare($sql) );
+
+	return $result;
+}
+
+
+//Tabla ps_address
+function address_endpoint() {
+    register_rest_route( 'v2', 'addresses', array(
+        'methods'  => WP_REST_Server::READABLE,
+        'callback' => 'get_addresses',
+    ) );
+}
+
+add_action( 'rest_api_init', 'address_endpoint' );
+
+function get_addresses( $request ) {
+	global $wpdb;
+    
+	$table = 'ps_address';
+	$sql = "SELECT * FROM $table";
+	$result = $wpdb->get_results( $wpdb->prepare($sql) );
+
+	return $result;
+}
+
+
+//Tabla ps_country
+function country_endpoint() {
+    register_rest_route( 'v2', 'countries', array(
+        'methods'  => WP_REST_Server::READABLE,
+        'callback' => 'get_countries',
+    ) );
+}
+
+add_action( 'rest_api_init', 'country_endpoint' );
+
+function get_countries( $request ) {
+	global $wpdb;
+    
+	$table = 'ps_country';
+	$sql = "SELECT * FROM $table";
+	$result = $wpdb->get_results( $wpdb->prepare($sql) );
+
+	return $result;
+}
+
+
+//Tabla ps_country_lang
+function country_lang_endpoint() {
+    register_rest_route( 'v2', 'country/langs', array(
+        'methods'  => WP_REST_Server::READABLE,
+        'callback' => 'get_country_langs',
+    ) );
+}
+
+add_action( 'rest_api_init', 'country_lang_endpoint' );
+
+function get_country_langs( $request ) {
+	global $wpdb;
+    
+	$table = 'ps_country_lang';
+	$sql = "SELECT * FROM $table";
+	$result = $wpdb->get_results( $wpdb->prepare($sql) );
+    
+	return $result;
+
+}
+
+
+//Tabla ps_state
+function state_endpoint() {
+    register_rest_route( 'v2', 'states', array(
+        'methods'  => WP_REST_Server::READABLE,
+        'callback' => 'get_states',
+    ) );
+}
+
+add_action( 'rest_api_init', 'state_endpoint' );
+
+function get_states( $request ) {
+	global $wpdb;
+
+	$table = 'ps_state';
+	$sql = "SELECT * FROM $table";
+	$result = $wpdb->get_results( $wpdb->prepare($sql) );
+    
+	return $result;
+}
