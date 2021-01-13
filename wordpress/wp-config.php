@@ -37,6 +37,9 @@ define( 'DB_CHARSET', 'utf8mb4' );
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
 
+define('JWT_AUTH_SECRET_KEY', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL3dwLXZ1ZSIsImlhdCI6MTYwOTI1OTg1NiwibmJmIjoxNjA5MjU5ODU2LCJleHAiOjE2MDk4NjQ2NTYsImRhdGEiOnsidXNlciI6eyJpZCI6IjEifX19.ySUodigGco7gxWehU-fgr2r5ACAVT-Rgxu1KTUDZj8s');
+define('JWT_AUTH_CORS_ENABLE', true);
+
 /**#@+
  * Authentication Unique Keys and Salts.
  *

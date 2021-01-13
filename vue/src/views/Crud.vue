@@ -2,14 +2,25 @@
   <v-data-table
     :headers="headers"
     :items="customers"
-    sort-by="id_customer"
+    :items-per-page="100"
+    sort-by="date_add"
     class="elevation-1"
+    :footer-props="{
+        'showFirstLastPage': true,
+        'firstIcon': 'mdi-arrow-collapse-left',
+        'lastIcon': 'mdi-arrow-collapse-right',
+        'prevIcon': 'mdi-minus',
+        'nextIcon': 'mdi-plus',
+        'items-per-page-text':'clientes por pagina',
+        'items-per-page-all-text':'todos',
+        'items-per-page-options':[100,200,500,-1],
+      }"
   >
     <template v-slot:top>
       <v-toolbar
         flat
       >
-        <v-toolbar-title>Clientes</v-toolbar-title>
+        <v-toolbar-title>GB Clientes</v-toolbar-title>
         <v-divider
           class="mx-4"
           inset
@@ -18,7 +29,7 @@
         <v-spacer></v-spacer>
         <v-dialog
           v-model="dialog"
-          max-width="500px"
+          max-width="800px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-btn
@@ -39,66 +50,60 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.firstname"
-                      label="Nombre"
-                    ></v-text-field>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.firstname" label="Nombre"></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.lastname"
-                      label="Apellidos"
-                    ></v-text-field>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.lastname" label="Apellidos"></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.email"
-                      label="Email"
-                    ></v-text-field>
+
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="editedItem.company" label="Empresa"></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.company"
-                      label="Empresa"
-                    ></v-text-field>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.phone1" label="Teléfono"></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.cif"
-                      label="CIF"
-                    ></v-text-field>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
                   </v-col>
-                  <v-col
-                    cols="12"
-                    sm="6"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="editedItem.id_shop"
-                      label="Tienda"
-                    ></v-text-field>
+
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="editedItem.address_1" label="Direccion 1"></v-text-field>
                   </v-col>
+
+                  <v-col cols="12" sm="12" md="12">
+                    <v-text-field v-model="editedItem.address_2" label="Direccion 2"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.address_2" label="Ciudad"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.state" label="provincia"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">                  
+                    <v-text-field
+                      v-model="editedItem.phone_mobile" label="Teléfono 2"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.cif" label="CIF"></v-text-field>
+                  </v-col>
+                  
+                  <v-col cols="12" sm="6" md="6">                  
+                    <v-text-field v-model="editedItem.vat_number" label="VAT Number"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.country" label="País"></v-text-field>
+                  </v-col>
+
                 </v-row>
               </v-container>
             </v-card-text>
@@ -136,19 +141,9 @@
       </v-toolbar>
     </template>
     <template v-slot:item.actions="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="editItem(item)"
-      >
-        mdi-pencil
-      </v-icon>
-      <v-icon
-        small
-        @click="deleteItem(item)"
-      >
-        mdi-delete
-      </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+      <v-icon small class="mr-2" @click="deleteItem(item)">mdi-delete</v-icon>
+      <v-icon small @click="editItem(item)">mdi-account</v-icon>
     </template>
     <template v-slot:no-data>
       <v-btn
@@ -164,16 +159,23 @@
 <script>
   export default {
     data: () => ({
+      config:{
+        headers:{
+          Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL3dwLXZ1ZSIsImlhdCI6MTYwOTI1OTg1NiwibmJmIjoxNjA5MjU5ODU2LCJleHAiOjE2MDk4NjQ2NTYsImRhdGEiOnsidXNlciI6eyJpZCI6IjEifX19.ySUodigGco7gxWehU-fgr2r5ACAVT-Rgxu1KTUDZj8s'
+        }
+      },
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'ID', value: 'id_customer' },
         { text: 'Nombre', value: 'firstname' },
         { text: 'Apellidos', value: 'lastname' },
-        { text: 'Email', value: 'email' },
         { text: 'Empresa', value: 'company' },
-        { text: 'CIF', value: 'cif' },
-        { text: 'Tienda', value: 'id_shop' },
+        { text: 'Telefono', value: 'telefono_1' },
+        { text: 'Email', value: 'email' },
+        { text: 'Direccion', value: 'address_1' },
+        { text: 'Ciudad', value: 'city' },
+        { text: 'Provincia', value: 'state' },
+        { text: 'Fecha de registro', value: 'date_add' },
         { text: 'X', value: 'actions', sortable: false },
       ],
       customers: [],
@@ -181,24 +183,29 @@
       editedItem: {
         firstname: '',
         lastname: '',
-        email: '',
         company: '',
-        CIF: '',
-        Shop: '',
+        telefono: '',
+        email: '',
+        direccion: '',
+        ciudad: '',
+        provincia: '',
       },
       defaultItem: {
         firstname: '',
         lastname: '',
-        email: '',
         company: '',
-        CIF: '',
-        Shop: '',
+        telefono: '',
+        email: '',
+        direccion: '',
+        ciudad: '',
+        provincia: '',
       },
     }),
 
     computed: {
       formTitle () {
-        return this.editedIndex === -1 ? 'Nuevo cliente' : 'Editar Cliente'
+        
+        return this.editedIndex === -1 ? 'Nuevo cliente' : ''
       },
     },
 
@@ -222,10 +229,8 @@
 
       async initialize () {
             try {
-                //Faltaria por definir el endpoint para customer
-                const customersDB = await this.axios.get('wp/v2/customers'); 
-
-                //console.log(entradasDB.data);
+                //endpoint para customer
+                const customersDB = await this.axios.get('v2/customers');                
 
                 await customersDB.data.forEach(element => {
                     let item = {}
@@ -233,9 +238,19 @@
                     item.firstname = element.firstname;
                     item.lastname = element.lastname;
                     item.email = element.email;
+                    item.phone1 = element.phone1;
+                    item.phone2 = element.phone2;
                     item.company = element.company;
-                    item.cif = element.cif;
                     item.shop = element.shop;
+                    item.address_1 = element.address_1;
+                    item.address_2 = element.address_2;
+                    item.postcode = element.postcode;
+                    item.city = element.city;
+                    item.state = element.state;
+                    item.country = element.country;
+                    item.postcode = element.vat_number;
+                    item.cif = element.cif;
+                    item.date_add = item.date_add;
 
                     this.customers.push(item);
                 });
@@ -244,6 +259,12 @@
                 console.log(error);
             }
         },
+
+      expandItem (item) {
+        this.editedIndex = this.customers.indexOf(item)
+        this.dialog = true
+
+      },
 
       editItem (item) {
         this.editedIndex = this.customers.indexOf(item)
@@ -282,6 +303,28 @@
         if (this.editedIndex > -1) {
           Object.assign(this.customers[this.editedIndex], this.editedItem)
         } else {
+          const customer = {
+            id_customer : this.editedItem.id_customer,
+            firstname : this.editedItem.firstname,
+            lastname : this.editedItem.lastname,
+            email : this.editedItem.email,
+            phone1 : this.editedItem.phone1,
+            phone2 : this.editedItem.phone2,
+            company : this.editedItem.company,
+            address_1 : this.editedItem.address_1,
+            address_2 : this.editedItem.address_2,
+            postcode : this.editedItem.postcode,
+            city : this.editedItem.city,
+            state : this.editedItem.state,
+            country : this.editedItem.country,
+            postcode : this.editedItem.vat_number,
+            cif : this.editedItem.cif,
+          }
+            //falta la nueva ruta para el post
+//          const customerDB = await this.axios.post('/v2/customers', customer, this.config)
+
+          this.editedItem = 
+
           this.customers.push(this.editedItem)
         }
         this.close()
