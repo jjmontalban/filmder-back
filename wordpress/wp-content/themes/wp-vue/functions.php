@@ -186,17 +186,17 @@ if ( defined( 'JETPACK__VERSION' ) ) {
  */
 
 
-//Tabla ps_customer
-function customer_endpoint() {
+//Traer todos los customers
+function get_customers_endpoint() {
     register_rest_route( 'v2', 'customers', array(
-        'methods'  => WP_REST_Server::READABLE,
+        'methods'  => 'GET',
         'callback' => 'get_customers',
     ) );
 }
 
-add_action( 'rest_api_init', 'customer_endpoint' );
+add_action( 'rest_api_init', 'get_customers_endpoint' );
 
-function get_customers( $request ) {
+function get_customers() {
 	global $wpdb;
     
 	$table = 'ps_customer';
@@ -207,86 +207,57 @@ function get_customers( $request ) {
 }
 
 
-//Tabla ps_address
-function address_endpoint() {
-    register_rest_route( 'v2', 'addresses', array(
-        'methods'  => WP_REST_Server::READABLE,
-        'callback' => 'get_addresses',
+//Insertar nuevo customer
+
+/**
+   * Prepare the item for create or update operation
+   *
+   * @param WP_REST_Request $request Request object
+   * @return WP_Error|object $prepared_item
+   */
+   function prepare_item_for_database( $request ) {
+    return array();
+  }
+
+
+  function add_cors_http_header(){
+    header("Access-Control-Allow-Origin: *");
+}
+add_action('init','add_cors_http_header');
+
+
+
+function post_customer_endpoint() {
+    register_rest_route( 'v2', 'customer', array(
+        'methods'  => 'POST',
+		'callback' => 'post_customer',
     ) );
 }
 
-add_action( 'rest_api_init', 'address_endpoint' );
+add_action( 'rest_api_init', 'post_customer_endpoint' );
 
-function get_addresses( $request ) {
-	global $wpdb;
-    
-	$table = 'ps_address';
-	$sql = "SELECT * FROM $table";
-	$result = $wpdb->get_results( $wpdb->prepare($sql) );
-
-	return $result;
-}
-
-
-//Tabla ps_country
-function country_endpoint() {
-    register_rest_route( 'v2', 'countries', array(
-        'methods'  => WP_REST_Server::READABLE,
-        'callback' => 'get_countries',
-    ) );
-}
-
-add_action( 'rest_api_init', 'country_endpoint' );
-
-function get_countries( $request ) {
-	global $wpdb;
-    
-	$table = 'ps_country';
-	$sql = "SELECT * FROM $table";
-	$result = $wpdb->get_results( $wpdb->prepare($sql) );
-
-	return $result;
-}
-
-
-//Tabla ps_country_lang
-function country_lang_endpoint() {
-    register_rest_route( 'v2', 'country/langs', array(
-        'methods'  => WP_REST_Server::READABLE,
-        'callback' => 'get_country_langs',
-    ) );
-}
-
-add_action( 'rest_api_init', 'country_lang_endpoint' );
-
-function get_country_langs( $request ) {
-	global $wpdb;
-    
-	$table = 'ps_country_lang';
-	$sql = "SELECT * FROM $table";
-	$result = $wpdb->get_results( $wpdb->prepare($sql) );
-    
-	return $result;
-
-}
-
-
-//Tabla ps_state
-function state_endpoint() {
-    register_rest_route( 'v2', 'states', array(
-        'methods'  => WP_REST_Server::READABLE,
-        'callback' => 'get_states',
-    ) );
-}
-
-add_action( 'rest_api_init', 'state_endpoint' );
-
-function get_states( $request ) {
+function post_customer(WP_REST_Request $request) {
 	global $wpdb;
 
-	$table = 'ps_state';
-	$sql = "SELECT * FROM $table";
-	$result = $wpdb->get_results( $wpdb->prepare($sql) );
-    
-	return $result;
+	$data = $request->get_params();
+	$result = $wpdb->insert('ps_customer', 
+	array(  'firstname' => $data['firstname'],
+			'lastname'  => $data['lastname'],
+			'company'  => $data['company'],
+			'email'  => $data['email'],
+			'phone_1'  => $data['phone_1'],
+			'phone_2'  => $data['phone_2'],
+			'address_1'  => $data['address_1'],
+			'address_2'  => $data['address_2'],
+			'postcode'  => $data['postcode'],
+			'city'  => $data['city'],
+			'state'  => $data['state'],
+			'country'  => $data['country'],
+			'shop'  => $data['shop'],
+			'cif'  => $data['cif'],
+			'vat_number'  => $data['vat_number'],
+			'date_add'  => $data['date_add'],
+		));
+
+	return $data;
 }

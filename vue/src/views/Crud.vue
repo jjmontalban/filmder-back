@@ -11,34 +11,19 @@
         'lastIcon': 'mdi-arrow-collapse-right',
         'prevIcon': 'mdi-minus',
         'nextIcon': 'mdi-plus',
-        'items-per-page-text':'clientes por pagina',
-        'items-per-page-all-text':'todos',
+        'items-per-page-text':'Clientes por pagina',
+        'items-per-page-all-text':'Todos',
         'items-per-page-options':[100,200,500,-1],
       }"
   >
     <template v-slot:top>
-      <v-toolbar
-        flat
-      >
+      <v-toolbar flat>
         <v-toolbar-title>GB Clientes</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
+        <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog
-          v-model="dialog"
-          max-width="800px"
-        >
+        <v-dialog v-model="dialog" max-width="800px">
           <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              color="primary"
-              dark
-              class="mb-2"
-              v-bind="attrs"
-              v-on="on"
-            >
+            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Nuevo cliente
             </v-btn>
           </template>
@@ -59,28 +44,37 @@
                     <v-text-field v-model="editedItem.lastname" label="Apellidos"></v-text-field>
                   </v-col>
 
-                  <v-col cols="12" sm="12" md="12">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.company" label="Empresa"></v-text-field>
                   </v-col>
 
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.phone1" label="Teléfono"></v-text-field>
-                  </v-col>
 
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.email" label="Email"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.phone_1" label="Teléfono 1"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.phone_2" label="Teléfono 2"></v-text-field>
                   </v-col>
 
                   <v-col cols="12" sm="12" md="12">
                     <v-text-field v-model="editedItem.address_1" label="Direccion 1"></v-text-field>
                   </v-col>
 
-                  <v-col cols="12" sm="12" md="12">
+                  <v-col cols="12" sm="6" md="6">
                     <v-text-field v-model="editedItem.address_2" label="Direccion 2"></v-text-field>
                   </v-col>
 
                   <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.address_2" label="Ciudad"></v-text-field>
+                    <v-text-field v-model="editedItem.shop" label="Tienda"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.city" label="Ciudad"></v-text-field>
                   </v-col>
 
                   <v-col cols="12" sm="6" md="6">
@@ -89,7 +83,11 @@
 
                   <v-col cols="12" sm="6" md="6">                  
                     <v-text-field
-                      v-model="editedItem.phone_mobile" label="Teléfono 2"></v-text-field>
+                      v-model="editedItem.postcode" label="Código Postal"></v-text-field>
+                  </v-col>
+
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field v-model="editedItem.country" label="País"></v-text-field>
                   </v-col>
 
                   <v-col cols="12" sm="6" md="6">
@@ -100,28 +98,16 @@
                     <v-text-field v-model="editedItem.vat_number" label="VAT Number"></v-text-field>
                   </v-col>
 
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.country" label="País"></v-text-field>
-                  </v-col>
-
                 </v-row>
               </v-container>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="close"
-              >
+              <v-btn color="blue darken-1" text @click="close">
                 Cancelar
               </v-btn>
-              <v-btn
-                color="blue darken-1"
-                text
-                @click="save"
-              >
+              <v-btn color="blue darken-1" text @click="save">
                 Guardar
               </v-btn>
             </v-card-actions>
@@ -145,14 +131,6 @@
       <v-icon small class="mr-2" @click="deleteItem(item)">mdi-delete</v-icon>
       <v-icon small @click="editItem(item)">mdi-account</v-icon>
     </template>
-    <template v-slot:no-data>
-      <v-btn
-        color="primary"
-        @click="initialize"
-      >
-        Reset
-      </v-btn>
-    </template>
   </v-data-table>
 </template>
 
@@ -161,7 +139,7 @@
     data: () => ({
       config:{
         headers:{
-          Authorization: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL3dwLXZ1ZSIsImlhdCI6MTYwOTI1OTg1NiwibmJmIjoxNjA5MjU5ODU2LCJleHAiOjE2MDk4NjQ2NTYsImRhdGEiOnsidXNlciI6eyJpZCI6IjEifX19.ySUodigGco7gxWehU-fgr2r5ACAVT-Rgxu1KTUDZj8s'
+          Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL3dwLXZ1ZSIsImlhdCI6MTYwOTI1OTg1NiwibmJmIjoxNjA5MjU5ODU2LCJleHAiOjE2MDk4NjQ2NTYsImRhdGEiOnsidXNlciI6eyJpZCI6IjEifX19.ySUodigGco7gxWehU-fgr2r5ACAVT-Rgxu1KTUDZj8s'
         }
       },
       dialog: false,
@@ -170,7 +148,7 @@
         { text: 'Nombre', value: 'firstname' },
         { text: 'Apellidos', value: 'lastname' },
         { text: 'Empresa', value: 'company' },
-        { text: 'Telefono', value: 'telefono_1' },
+        { text: 'Telefono', value: 'phone_1' },
         { text: 'Email', value: 'email' },
         { text: 'Direccion', value: 'address_1' },
         { text: 'Ciudad', value: 'city' },
@@ -181,24 +159,40 @@
       customers: [],
       editedIndex: -1,
       editedItem: {
+        id_customer: '',
         firstname: '',
         lastname: '',
         company: '',
-        telefono: '',
-        email: '',
-        direccion: '',
-        ciudad: '',
-        provincia: '',
+        phone_1: '',
+        phone_2: '',
+        address_1: '',
+        address_2: '',
+        postcode: '',
+        city: '',
+        state: '',
+        country: '',
+        shop: '',
+        cif: '',
+        vat_number: '',
+        date_add: '',
       },
       defaultItem: {
+        id_customer: '',
         firstname: '',
         lastname: '',
         company: '',
-        telefono: '',
-        email: '',
-        direccion: '',
-        ciudad: '',
-        provincia: '',
+        phone_1: '',
+        phone_2: '',
+        address_1: '',
+        address_2: '',
+        postcode: '',
+        city: '',
+        state: '',
+        country: '',
+        shop: '',
+        cif: '',
+        vat_number: '',
+        date_add: '',
       },
     }),
 
@@ -238,8 +232,8 @@
                     item.firstname = element.firstname;
                     item.lastname = element.lastname;
                     item.email = element.email;
-                    item.phone1 = element.phone1;
-                    item.phone2 = element.phone2;
+                    item.phone_1 = element.phone_1;
+                    item.phone_2 = element.phone_2;
                     item.company = element.company;
                     item.shop = element.shop;
                     item.address_1 = element.address_1;
@@ -250,7 +244,8 @@
                     item.country = element.country;
                     item.postcode = element.vat_number;
                     item.cif = element.cif;
-                    item.date_add = item.date_add;
+                    item.vat_number = element.vat_number;
+                    item.date_add = element.date_add;
 
                     this.customers.push(item);
                 });
@@ -259,12 +254,6 @@
                 console.log(error);
             }
         },
-
-      expandItem (item) {
-        this.editedIndex = this.customers.indexOf(item)
-        this.dialog = true
-
-      },
 
       editItem (item) {
         this.editedIndex = this.customers.indexOf(item)
@@ -299,33 +288,41 @@
         })
       },
 
-      save () {
-        if (this.editedIndex > -1) {
+      async save () {
+        if (this.editedIndex > -1) { //ejecuta edicion
           Object.assign(this.customers[this.editedIndex], this.editedItem)
-        } else {
-          const customer = {
-            id_customer : this.editedItem.id_customer,
-            firstname : this.editedItem.firstname,
-            lastname : this.editedItem.lastname,
-            email : this.editedItem.email,
-            phone1 : this.editedItem.phone1,
-            phone2 : this.editedItem.phone2,
-            company : this.editedItem.company,
-            address_1 : this.editedItem.address_1,
-            address_2 : this.editedItem.address_2,
-            postcode : this.editedItem.postcode,
-            city : this.editedItem.city,
-            state : this.editedItem.state,
-            country : this.editedItem.country,
-            postcode : this.editedItem.vat_number,
-            cif : this.editedItem.cif,
-          }
-            //falta la nueva ruta para el post
-//          const customerDB = await this.axios.post('/v2/customers', customer, this.config)
+        } else { //ejecuta creacion
+          
+            try{
+              const customer = {
+                id : this.editedItem.id,
+                firstname : this.editedItem.firstname,
+                lastname : this.editedItem.lastname,
+                company : this.editedItem.company,
+                email : this.editedItem.email,
+                phone_1 : this.editedItem.phone_1,
+                phone_2 : this.editedItem.phone_2,
+                address_1 : this.editedItem.address_1,
+                address_2 : this.editedItem.address_2,
+                shop : this.editedItem.shop,
+                postcode : this.editedItem.postcode,
+                city : this.editedItem.city,
+                state : this.editedItem.state,
+                country : this.editedItem.country,
+                vat_number : this.editedItem.vat_number,
+                cif : this.editedItem.cif,
+                date_add : this.editedItem.date_add,
+                }  
+              //falta la nueva ruta para el post
+              const customerDB = await this.axios.post('/v2/customer', customer, this.config)
 
-          this.editedItem = 
+            console.log(customerDB.data);
 
-          this.customers.push(this.editedItem)
+            this.customers.push(this.editedItem)
+            }catch(error){
+              console.log(error);
+            }
+          
         }
         this.close()
       },

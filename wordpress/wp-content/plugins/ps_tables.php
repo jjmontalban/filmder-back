@@ -20,71 +20,27 @@ function ps_tables_activation()
     $queries = array();
 
     array_push($queries, "CREATE TABLE IF NOT EXISTS ps_customer (
-           `id_customer` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `id_shop` INT(11) UNSIGNED NOT NULL DEFAULT '1',
-            `cif` INT(11) NOT NULL,
+            `id_customer` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
             `firstname` VARCHAR(32) NOT NULL COLLATE 'utf8_general_ci',
             `lastname` VARCHAR(32) NOT NULL COLLATE 'utf8_general_ci',
-            `email` VARCHAR(128) NOT NULL COLLATE 'utf8_general_ci',
-            `date_add` DATETIME NOT NULL,
             `company` VARCHAR(64) NULL COLLATE 'utf8_general_ci',
-
-            PRIMARY KEY (`id_customer`) USING BTREE,
-            INDEX `customer_email` (`email`) USING BTREE,
-            INDEX `id_shop` (`id_shop`, `date_add`) USING BTREE
-            )");
-
-    array_push($queries, "CREATE TABLE IF NOT EXISTS ps_address (
-            `id_address` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `id_country` INT(10) UNSIGNED NOT NULL,
-            `id_state` INT(10) UNSIGNED NULL,
-            `id_customer` INT(10) UNSIGNED NOT NULL DEFAULT '0',
-            `company` VARCHAR(255) NULL COLLATE 'utf8_general_ci',
-            `lastname` VARCHAR(32) NOT NULL COLLATE 'utf8_general_ci',
-            `firstname` VARCHAR(32) NOT NULL COLLATE 'utf8_general_ci',
-            `address1` VARCHAR(128) NOT NULL COLLATE 'utf8_general_ci',
-            `address2` VARCHAR(128) NULL COLLATE 'utf8_general_ci',
-            `postcode` VARCHAR(12) NULL COLLATE 'utf8_general_ci',
+            `email` VARCHAR(128) NOT NULL COLLATE 'utf8_general_ci',
+            `phone_1` VARCHAR(32) NOT NULL COLLATE 'utf8_general_ci',
+            `phone_2` VARCHAR(32) NULL COLLATE 'utf8_general_ci',
+            `address_1` VARCHAR(128) NOT NULL COLLATE 'utf8_general_ci',
+            `address_2` VARCHAR(128) NULL COLLATE 'utf8_general_ci',
+            `postcode` VARCHAR(12) NOT NULL COLLATE 'utf8_general_ci',
             `city` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
-            `phone` VARCHAR(32) NULL COLLATE 'utf8_general_ci',
-            `phone_mobile` VARCHAR(32) NULL COLLATE 'utf8_general_ci',
+            `state` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
+            `country` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
+            `shop` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
+            `cif` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
             `vat_number` VARCHAR(32) NULL COLLATE 'utf8_general_ci',
-            `dni` VARCHAR(16) NULL COLLATE 'utf8_general_ci',
             `date_add` DATETIME NOT NULL,
 
-            PRIMARY KEY (`id_address`) USING BTREE,
-            INDEX `address_customer` (`id_customer`) USING BTREE,
-            INDEX `id_country` (`id_country`) USING BTREE,
-            INDEX `id_state` (`id_state`) USING BTREE
+            PRIMARY KEY (`id_customer`) USING BTREE
             )");
 
-    array_push($queries, "CREATE TABLE IF NOT EXISTS ps_country (
-            `id_country` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `iso_code` VARCHAR(3) NOT NULL COLLATE 'utf8_general_ci',
-            `zip_code_format` VARCHAR(12) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
-
-            PRIMARY KEY (`id_country`) USING BTREE,
-            INDEX `country_iso_code` (`iso_code`) USING BTREE
-            )");
-
-    array_push($queries, "CREATE TABLE IF NOT EXISTS ps_country_lang (
-            `id_country` INT(10) UNSIGNED NOT NULL,
-            `id_lang` INT(10) UNSIGNED NOT NULL,
-            `name` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
-
-            UNIQUE INDEX `country_lang_index` (`id_country`, `id_lang`) USING BTREE
-            )");
-
-    array_push($queries, "CREATE TABLE IF NOT EXISTS ps_state (
-            `id_state` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `id_country` INT(11) UNSIGNED NOT NULL,
-            `name` VARCHAR(64) NOT NULL COLLATE 'utf8_general_ci',
-            `iso_code` VARCHAR(7) NOT NULL COLLATE 'utf8_general_ci',
-            
-            PRIMARY KEY (`id_state`) USING BTREE,
-            INDEX `id_country` (`id_country`) USING BTREE,
-            INDEX `statename` (`name`) USING BTREE
-            )");
 
     foreach ($queries as $key => $sql) {
         dbDelta( $sql );
@@ -94,7 +50,7 @@ function ps_tables_activation()
 function ps_tables_deactivation()
 {
     global $wpdb;
-    $sql = "DROP TABLE IF EXISTS ps_customer,ps_address,ps_country,ps_state,ps_country_lang";
+    $sql = "DROP TABLE IF EXISTS ps_customer";
     $wpdb->get_results($sql);
 }
 
