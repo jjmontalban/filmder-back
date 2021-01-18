@@ -13,7 +13,8 @@ App Vue with Wordpress Backend
 * [Wordpress](https://wordpress.org/) - CMS
 * [Underscores](https://github.com/automattic/_s) - Wordpress Theme
 
-![Alt text](https://prnt.sc/x4x3ol "screenshot")
+You can check a [Front Screenshot](https://prnt.sc/x4x3ol)
+
 
 ## License 📄
 
