@@ -29,4 +29,4 @@ This project is open-sourced software licensed under [MIT License](https://opens
 
 
 ---
-Dev with ❤️ by [JJMontalban](https://jjmontalban.github.io 😊
+Dev with ❤️ by [JJMontalban](https://jjmontalban.github.io) 😊
