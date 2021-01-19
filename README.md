@@ -1,6 +1,6 @@
 # Wordpress & Vue
 
-App Vue with Wordpress Backend
+App Vue with Wordpress Backend. Plugin Wordpress + Custom Endpoints and extended WP API Rest
 
 * [Wordpress plugin](https://github.com/jjmontalban/wp-vue/blob/develop/wordpress/wp-content/plugins/ps_tables.php) for creating custom database table.
 * [Extending Wordpress Api REST](https://github.com/jjmontalban/wp-vue/blob/develop/wordpress/wp-content/themes/wp-vue/functions.php) for CRUD access for custom endpoint via Api.
