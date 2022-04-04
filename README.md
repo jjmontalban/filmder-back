@@ -23,7 +23,7 @@ This project is open-sourced software licensed under [MIT License](https://opens
 
 ## Thankfulness 🎁
 
-* Star this porject 📢 
+* Star this project 📢 
 * just thank me 🤓
 
 
