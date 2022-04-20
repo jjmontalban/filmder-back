@@ -43,23 +43,29 @@ Latest commit 3a4164e 18 minutes ago
 
 /*
 !.gitignore
+!vue
+!wordpress
 
 # Vue.
 vue/*
-!vue/src/
-!vue/package.json
+!vue/src
+!package.json
 
 # Wordpress.
 # Ignore everything in the root except the "wp-content" directory.
 wordpress/*
-!wordpress/wp-content/
+!wordpress/wp-content
 
 # Ignore everything in the "wp-content" directory, except the "plugins" directory.
-wp-content/*
+wordpress/wp-content/*
 !wordpress/wp-content/plugins/
+!wordpress/wp-content/themes/
 
-# Ignore everything in the "plugins" directory, except the plugins you
-# specify (see the commented-out examples for hints on how to do this.)
-wordpress/wp-content/plugins/*
+# Ignore everything in the "plugins" directory, except
+/wordpress/wp-content/plugins/*
 !wordpress/wp-content/plugins/jwt-authentication-for-wp-rest-api/
 !wordpress/wp-content/plugins/test-table.php
+
+# Ignore everything in the "themes" directory, except
+/wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/wp-vue
