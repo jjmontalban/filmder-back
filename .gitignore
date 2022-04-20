@@ -35,7 +35,7 @@ wordpress/wp-content/*
 # Ignore everything in the "plugins" directory, except
 /wordpress/wp-content/plugins/*
 !wordpress/wp-content/plugins/jwt-authentication-for-wp-rest-api/
-!wordpress/wp-content/plugins/test-table.php
+!wordpress/wp-content/plugins/test-tables.php
 
 # Ignore everything in the "themes" directory, except
 /wordpress/wp-content/themes/*
