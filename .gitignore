@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Skip to content
 Search or jump to…
 Pull requests
@@ -27,6 +28,8 @@ Latest commit 3a4164e 18 minutes ago
  1 contributor
 34 lines (30 sloc)  1.3 KB
    
+=======
+>>>>>>> develop
 # This is a template .gitignore file for git-managed WordPress projects.
 #
 # Fact: you don't want WordPress core files, or your server-specific
@@ -43,15 +46,26 @@ Latest commit 3a4164e 18 minutes ago
 
 /*
 !.gitignore
+<<<<<<< HEAD
 
 # Vue.
 vue/*
 !vue/src/
 !vue/package.json
+=======
+!vue
+!wordpress
+
+# Vue.
+vue/*
+!vue/src
+!package.json
+>>>>>>> develop
 
 # Wordpress.
 # Ignore everything in the root except the "wp-content" directory.
 wordpress/*
+<<<<<<< HEAD
 !wordpress/wp-content/
 
 
@@ -68,3 +82,20 @@ plugins/*
 # Ignore everything in the "themes" directory, except the custom theme
 plugins/*
 !plugins/wp-vue
+=======
+!wordpress/wp-content
+
+# Ignore everything in the "wp-content" directory, except the "plugins" directory.
+wordpress/wp-content/*
+!wordpress/wp-content/plugins/
+!wordpress/wp-content/themes/
+
+# Ignore everything in the "plugins" directory, except
+/wordpress/wp-content/plugins/*
+!wordpress/wp-content/plugins/jwt-authentication-for-wp-rest-api/
+!wordpress/wp-content/plugins/test-tables.php
+
+# Ignore everything in the "themes" directory, except
+/wordpress/wp-content/themes/*
+!wordpress/wp-content/themes/wp-vue
+>>>>>>> develop
