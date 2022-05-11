@@ -1,35 +1,3 @@
-<<<<<<< HEAD
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@jjmontalban 
-jjmontalban
-/
-wp-customers
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-wp-customers/.gitignore
-@jjmontalban
-jjmontalban first commit
-Latest commit 3a4164e 18 minutes ago
- History
- 1 contributor
-34 lines (30 sloc)  1.3 KB
-   
-=======
->>>>>>> develop
 # This is a template .gitignore file for git-managed WordPress projects.
 #
 # Fact: you don't want WordPress core files, or your server-specific
