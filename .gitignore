@@ -14,29 +14,29 @@
 
 /*
 !.gitignore
-!vue
-!wordpress
 
 # Vue.
 vue/*
-!vue/src
-!package.json
+!vue/src/
+!vue/package.json
 
 # Wordpress.
 # Ignore everything in the root except the "wp-content" directory.
 wordpress/*
-!wordpress/wp-content
+!wordpress/wp-content/
+
 
 # Ignore everything in the "wp-content" directory, except the "plugins" directory.
-wordpress/wp-content/*
-!wordpress/wp-content/plugins/
-!wordpress/wp-content/themes/
+wp-content/*
+!wp-content/plugins/
+!wp-content/themes/
 
-# Ignore everything in the "plugins" directory, except
-/wordpress/wp-content/plugins/*
-!wordpress/wp-content/plugins/jwt-authentication-for-wp-rest-api/
-!wordpress/wp-content/plugins/test-tables.php
+# Ignore everything in the "plugins" directory, except the plugins you
+plugins/*
+!plugins/jwt-authentication-for-wp-rest-api/
+!plugins/api-tmdb/
+!plugins/cpt-movie/
 
-# Ignore everything in the "themes" directory, except
-/wordpress/wp-content/themes/*
-!wordpress/wp-content/themes/wp-vue
+# Ignore everything in the "themes" directory, except the custom theme
+themes/*
+!themes/wp-vue/
