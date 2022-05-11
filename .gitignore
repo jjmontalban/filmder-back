@@ -30,8 +30,8 @@
 /wordpress/wp-content/languages/*
 /wordpress/wp-content/uploads/*
 /wordpress/wp-content/upgrade/*
-
+/wordpress/wp-content/plugins/*
 !wordpress/wp-content/plugins/api-tmdb/*
 !wordpress/wp-content/plugins/cpt-movie/*
-
+/wordpress/wp-content/themes/*
 !wordpress/wp-content/themes/wp-vue/*
