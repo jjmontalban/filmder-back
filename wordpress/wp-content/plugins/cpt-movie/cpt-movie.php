@@ -9,22 +9,42 @@
  * version: 0.1.0
  * License: GPL2 or later.
  * cpt-movies: custom post type, CPT
+ * Text Domain: cpt-movie
+ * Domain path: /lang
  */
+
+
+/**
+ * Translations
+ *
+ * @link https://decodecms.com/internacionalizar-plugin-wordpress/
+ * .pot creation (wp-cli): "wp i18n make-pot . lang/cpt-movie.pot"
+ */
+function jj_plugin_load_textdomain() {
+    
+    $text_domain	= 'cpt-movie';
+	$path_languages = basename(dirname(__FILE__)).'/lang/';
+    
+    load_plugin_textdomain($text_domain, false, $path_languages );
+}
+add_action('plugins_loaded', 'jj_plugin_load_textdomain');
+
 
 
 /**
  * Register custom post type 'movie'.
  *
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
+ * 
  */
 function register_movie_post_type()
 {
     /* Añado las etiquetas que aparecerán en el escritorio de WordPress */
     $labels = array(
-        'name'               => __( 'Movies', 'post type general name', 'cpt-movie' ),
-        'singular_name'      => __( 'Movie', 'post type singular name', 'cpt-movie' ),
-        'menu_name'          => __( 'Movies', 'admin menu', 'cpt-movie' ),
-        'add_new'            => __( 'Add New', 'movie', 'cpt-movie' ),
+        'name'               => _x( 'Movies', 'post type general name', 'cpt-movie' ),
+        'singular_name'      => _x( 'Movie', 'post type singular name', 'cpt-movie' ),
+        'menu_name'          => _x( 'Movies', 'admin menu', 'cpt-movie' ),
+        'add_new'            => _x( 'Add New', 'movie', 'cpt-movie' ),
         'add_new_item'       => __( 'Add New Movie', 'cpt-movie' ),
         'new_item'           => __( 'New Movie', 'cpt-movie' ),
         'edit_item'          => __( 'Edit Movie', 'cpt-movie' ),
