@@ -28,6 +28,9 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   data() {
     return {
@@ -44,7 +47,7 @@ export default {
         this.loaded = false;
         this.success = false;
         this.errors = {};
-        axios.post('/contact', this.fields).then(response => {
+/*         axios.post('/contact', this.fields).then(response => {
           this.fields = {}; //Clear input fields.
           this.loaded = true;
           this.success = true;
@@ -53,7 +56,7 @@ export default {
           if (error.response.status === 422) {
             this.errors = error.response.data.errors || {};
           }
-        });
+        }); */
       }
     },
   },

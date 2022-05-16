@@ -13,12 +13,14 @@ import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 
 import VuePageTransition from 'vue-page-transition'
+import vuetify from './plugins/vuetify'
 Vue.use(VuePageTransition)
 
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')
 
 // Agregamos la URL base de nuestra API
