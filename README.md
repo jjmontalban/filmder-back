@@ -2,14 +2,15 @@
 
 App Vue with Wordpress Backend. Plugin Wordpress + Custom Endpoints and extended WP API Rest
 
-* [Wordpress plugin](https://github.com/jjmontalban/wp-vue/blob/develop/wordpress/wp-content/plugins/ps_tables.php) for creating custom database table.
-* [Extending Wordpress Api REST](https://github.com/jjmontalban/wp-vue/blob/develop/wordpress/wp-content/themes/wp-vue/functions.php) for CRUD access for custom endpoint via Api.
-* [Vuetify datatable design apply](https://github.com/jjmontalban/wp-vue/blob/develop/vue/src/views/Crud.vue)
+* [Wordpress plugin](https://github.com/jjmontalban/wp-vue/tree/feature/api-tmdb) 
+  - Custom Post Type Movie
+  - Api TMDB to get Movies Information
+  
+* [Extending Wordpress Api REST](https://github.com/jjmontalban/wp-vue/tree/develop/wordpress/wp-content/themes/wp-vuep) Access for custom endpoint via Api.
 
 ## Buid with 🛠️
 
 * [Vuejs](https://github.com/vuejs/vue) - Js Framework
-* [Vuetify](https://github.com/vuetifyjs/vuetify) - Material Design Framework
 * [Wordpress](https://wordpress.org/) - CMS
 * [Underscores](https://github.com/automattic/_s) - Wordpress Theme
 
