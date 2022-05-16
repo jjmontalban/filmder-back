@@ -135,6 +135,7 @@ function content_movie_meta_box( $movie )
     $vote_avg = get_post_meta( $movie->ID, 'vote_avg', true );
     $vote_count = get_post_meta( $movie->ID, 'vote_count', true );
     $rating = get_post_meta( $movie->ID, 'rating', true );
+    $tmdb_id = get_post_meta( $movie->ID, 'tmdb_id', true );
     
     //Usaremos este nonce field más adelante cuando guardemos en twp_save_meta_box()
     wp_nonce_field( 'movie_meta_box_nonce', 'meta_box_nonce' );
@@ -147,12 +148,8 @@ function content_movie_meta_box( $movie )
                 <td><input type="text" name="original_title" id="original_title" value="<?php echo esc_html( $original_title ); ?>" /></td>
             </tr>
             <tr>
-                <th><label for="overview"><?php _e('Overview', 'cpt-movie') ?></label></th>
-                <td><textarea name="original_title" id="original_title" value="<?php echo esc_html( $original_title ); ?>" /></textarea>
-            </tr>
-            <tr>
                 <th><label for="release_date"><?php _e('Release Date', 'cpt-movie') ?></label></th>
-                <td><input type="date" name="release_date" id="release_date" value="<?php echo esc_html( $release_date ); ?>" /></td>
+                <td><input type="date" name="release_date" id="release_date" value="<?php echo esc_html( $release_date ); ?>"/></td>
             </tr>
             <tr>
                 <th><label for="vote_avg"><?php _e('Vote Average', 'cpt-movie') ?></label></th>
@@ -164,7 +161,7 @@ function content_movie_meta_box( $movie )
             </tr>
             <tr>
                 <th><label for="rating"><?php _e('Rating', 'cpt-movie') ?></label></th>
-                <td><input type="text" name="original_title" id="original_title" value="<?php echo esc_html( $original_title ); ?>" /></td>
+                <td><input type="text" name="rating" id="rating" value="<?php echo esc_html( $rating ); ?>" /></td>
             </tr>
 	    </tbody>
     </table>
@@ -185,8 +182,6 @@ function movie_save_meta_box( $movie_id ) {
     // Guardamos
     if( isset( $_POST['original_title'] ) )
         update_post_meta( $movie_id, 'original_title', wp_kses( $_POST['original_title'], $allowed ) );
-    if( isset( $_POST['overview'] ) )
-        update_post_meta( $movie_id, 'overview', wp_kses( $_POST['overview'], $allowed ) );
     if( isset( $_POST['release_date'] ) )
         update_post_meta( $movie_id, 'release_date', wp_kses( $_POST['release_date'], $allowed ) );
     if( isset( $_POST['vote_avg'] ) )
@@ -195,6 +190,8 @@ function movie_save_meta_box( $movie_id ) {
         update_post_meta( $movie_id, 'vote_count', wp_kses( $_POST['vote_count'], $allowed ) );
     if( isset( $_POST['rating'] ) )
         update_post_meta( $movie_id, 'rating', wp_kses( $_POST['rating'], $allowed ) );
+    if( isset( $_POST['tmdb_id'] ) )
+        update_post_meta( $movie_id, 'tmdb_id', wp_kses( $_POST['tmdb_id'], $allowed ) );
 }
 
 add_action( 'save_post', 'movie_save_meta_box' );
