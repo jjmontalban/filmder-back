@@ -1,0 +1,160 @@
+# Copyright (C) 2022 JJ Montalban
+# This file is distributed under the GPL2 or later..
+msgid ""
+msgstr ""
+"Project-Id-Version: CPT Movie 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cpt-movie\n"
+"POT-Creation-Date: 2022-05-12 10:04+0200\n"
+"PO-Revision-Date: 2022-05-12 10:08+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Domain: cpt-movie\n"
+
+#. Plugin Name of the plugin
+msgid "CPT Movie"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://jjmontalban.github.io/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Register a CPT Movie"
+msgstr "Registra un CPT Película"
+
+#. Author of the plugin
+msgid "JJ Montalban"
+msgstr ""
+
+#: cpt-movie.php:45
+msgctxt "post type general name"
+msgid "Movies"
+msgstr "Películas"
+
+#: cpt-movie.php:46
+msgctxt "post type singular name"
+msgid "Movie"
+msgstr "Película"
+
+#: cpt-movie.php:47
+msgctxt "admin menu"
+msgid "Movies"
+msgstr "Películas"
+
+#: cpt-movie.php:48
+msgctxt "movie"
+msgid "Add New"
+msgstr "Añadir Nueva"
+
+#: cpt-movie.php:49
+msgid "Add New Movie"
+msgstr "Añadir Nueva Película"
+
+#: cpt-movie.php:50
+msgid "New Movie"
+msgstr "Nueva Película"
+
+#: cpt-movie.php:51
+msgid "Edit Movie"
+msgstr "Editar Película"
+
+#: cpt-movie.php:52
+msgid "Movie"
+msgstr "Película"
+
+#: cpt-movie.php:53
+msgid "All Movies"
+msgstr "Todas las Películas"
+
+#: cpt-movie.php:54
+msgid "Search Movie"
+msgstr "Buscar Película"
+
+#: cpt-movie.php:55
+msgid "No Movies."
+msgstr "No hay Películas."
+
+#: cpt-movie.php:56
+msgid "No movies in Trash."
+msgstr "No hay Películas en la Papelera."
+
+#: cpt-movie.php:62
+msgid "Show Movie Information"
+msgstr "Mostrar Información de Película"
+
+#: cpt-movie.php:85
+msgctxt "taxonomy general name"
+msgid "Genres"
+msgstr "Géneros"
+
+#: cpt-movie.php:86
+msgctxt "taxonomy singular name"
+msgid "Genre"
+msgstr "Género"
+
+#: cpt-movie.php:87
+msgid "Search for Genre"
+msgstr "Buscar Género"
+
+#: cpt-movie.php:88
+msgid "All Genres"
+msgstr "Todos los Géneros"
+
+#: cpt-movie.php:89
+msgid "Root Genre"
+msgstr "Género Raíz"
+
+#: cpt-movie.php:90
+msgid "Root Genre:"
+msgstr "Género Raíz:"
+
+#: cpt-movie.php:91
+msgid "Edit Genre"
+msgstr "Editar Género"
+
+#: cpt-movie.php:92
+msgid "Update Genre"
+msgstr "Actualizar Género"
+
+#: cpt-movie.php:93
+msgid "Add New Genre"
+msgstr "Añadir Nuevo Género"
+
+#: cpt-movie.php:94
+msgid "New Genre Name"
+msgstr "Nuevo Nombre de Género"
+
+#: cpt-movie.php:121
+msgid "Movie information"
+msgstr "Información de la Película"
+
+#: cpt-movie.php:147
+msgid "Original Title"
+msgstr "Título Original"
+
+#: cpt-movie.php:151
+msgid "Overview"
+msgstr "Sinopsis"
+
+#: cpt-movie.php:155
+msgid "Release Date"
+msgstr "Fecha de Estreno"
+
+#: cpt-movie.php:159
+msgid "Vote Average"
+msgstr "Media de Votos"
+
+#: cpt-movie.php:163
+msgid "Vote Count"
+msgstr "Nº de Votos"
+
+#: cpt-movie.php:167
+msgid "Rating"
+msgstr "Puntuación"
