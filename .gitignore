@@ -33,4 +33,5 @@
 /wordpress/wp-content/plugins/*
 !wordpress/wp-content/plugins/api-tmdb/*
 !wordpress/wp-content/plugins/cpt-movie/*
+!wordpress/wp-content/plugins/jwt-authentication-for-wp-rest-api/*
 
