@@ -1,27 +1,36 @@
 <template>
-        <v-app-bar color="white" app absolute elevate-on-scroll>
+  <div class="text-center spacing-playground pa-6" fluid>
 
-                <v-btn link exact :to="{ name: 'home' }" icon width="auto" height="auto" class="ma-3" elevation="10">
-                    <v-avatar size="80">
-                        <img src="\images\pop-corn-icon.png">
-                    </v-avatar>
-                </v-btn>
-
-                <v-btn link exact :to="{ name: 'about' }" icon width="auto" height="auto" class="ma-3" elevation="10">
-                    <v-avatar size="80">
-                        <img src="\images\chair-icon.png">
-                    </v-avatar>
-                </v-btn>
-
-                <v-btn link exact :to="{ name: 'contact' }" icon width="auto" height="auto" class="ma-3" elevation="10">
-                    <v-avatar size="80">
-                        <img src="\images\paper-plane-icon.png">
-                    </v-avatar>
-                </v-btn>
-                
-        </v-app-bar>
-        
+    <v-btn  link exact :to="{ name: 'home' }" class="mx-2" fab x-large color="white">
+        <v-img
+            :src="require('../assets/pop-corn-icon.png')"
+            class="my-3"
+            contain
+            height="95"
+        />
+    </v-btn>
+    
+    <v-btn link exact :to="{ name: 'about' }" class="mx-2" fab x-large color="white">
+      <v-img
+            :src="require('../assets/chair-icon.png')"
+            class="my-3"
+            contain
+            height="95"
+        />
+    </v-btn>
+    
+    <v-btn link exact :to="{ name: 'contact' }" class="mx-2" fab x-large color="white">
+        <v-img
+            :src="require('../assets/paper-plane-icon.png')"
+            class="my-3"
+            contain
+            height="95"
+        />
+    </v-btn>
+  
+  </div>
 </template>
+
 <script>
 
     export default {
