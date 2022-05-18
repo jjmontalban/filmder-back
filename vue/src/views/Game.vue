@@ -75,13 +75,14 @@ export default {
             .get(this.postsUrl)
             .then(response => {
             this.posts = response.data;
-            console.log(this.posts[0].id);
+            //console.log(this.posts[0].movie_data['original_title']);
+            console.log(this.posts);
             })
             .catch(error => {
             console.log(error);
             });
         },    
-        mock(count = 5) {
+        mock(count = 20) {
         const list = [];
         for (let i = 0; i < count; i++) {
             list.push({ id: source[this.offset] });

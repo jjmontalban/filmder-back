@@ -198,7 +198,7 @@ function movie_save_meta_box( $movie_id ) {
 
 add_action( 'save_post', 'movie_save_meta_box' );
 
-//Registro de ruta API propia para acceder a las movies
+//Registro de ruta Rest API propia para acceder a las movies
 function my_plugin_rest_route_for_post( $route, $post ) {
     if ( $post->post_type === 'movie' ) {
         $route = '/wp/v2/movies/' . $post->ID;
@@ -207,3 +207,45 @@ function my_plugin_rest_route_for_post( $route, $post ) {
     return $route;
 }
 add_filter( 'rest_route_for_post', 'my_plugin_rest_route_for_post', 10, 2 );
+
+
+
+// Agregando los Post Meta Movies a la Rest API
+
+add_action( 'rest_api_init', 'crear_campo_adicional_api_posts' );
+ 
+function crear_campo_adicional_api_posts() 
+{
+	register_rest_field( 'movie', 'movie_data',  
+                            array( 'get_callback' => 'read_movie_data' )
+						);
+}
+ 
+function read_movie_data( $object ) {
+	$post_id = $object['id'];
+	return get_post_meta( $post_id );
+}
+
+
+
+// Get featured image Movie from Rest API 
+// https://github.com/dalenguyen/wordpress-snippets/blob/master/src/get_featured_image_from_rest_api.php
+
+add_action('rest_api_init', 'register_rest_movie_image' );
+
+function register_rest_movie_image()
+{
+    register_rest_field( 'movie', 'movie_image',
+                            array( 'get_callback'    => 'get_rest_featured_image',
+        )
+    );
+}
+
+function get_rest_featured_image( $object, $field_name, $request ) {
+    if( $object['featured_media'] )
+    {
+        $img = wp_get_attachment_image_src( $object['featured_media'], 'app-thumb' );
+        return $img[0];
+    }
+    return false;
+}
