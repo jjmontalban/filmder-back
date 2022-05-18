@@ -60,6 +60,8 @@ function register_movie_post_type()
         'labels'             => $labels,
         'description'        => __( 'Show Movie Information', 'cpt-movie' ),
         'public'             => true,
+        'show_in_rest'       => true,
+        'rest_base'          => 'movies',
         'publicly_queryable' => true,
         'show_ui'            => true,
         'show_in_menu'       => true,
@@ -195,3 +197,13 @@ function movie_save_meta_box( $movie_id ) {
 }
 
 add_action( 'save_post', 'movie_save_meta_box' );
+
+//Registro de ruta API propia para acceder a las movies
+function my_plugin_rest_route_for_post( $route, $post ) {
+    if ( $post->post_type === 'movie' ) {
+        $route = '/wp/v2/movies/' . $post->ID;
+    }
+ 
+    return $route;
+}
+add_filter( 'rest_route_for_post', 'my_plugin_rest_route_for_post', 10, 2 );

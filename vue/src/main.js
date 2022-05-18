@@ -10,8 +10,10 @@ Vue.use(VueAxios,axios)
 import VuePageTransition from 'vue-page-transition'
 Vue.use(VuePageTransition)
 
-//Agregamos la URL base de nuestra API
-axios.defaults.baseURL = 'http://localhost/wp-vue/wordpress/wp-json/'
+
+import Tinder from 'vue-tinder'
+Vue.use(Tinder)
+
 Vue.config.productionTip = false
 
 new Vue({

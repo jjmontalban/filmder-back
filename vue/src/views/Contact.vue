@@ -17,16 +17,7 @@
       dialog: false,
       dialogDelete: false,
       headers: [
-        { text: 'Nombre', value: 'firstname' },
-        { text: 'Apellidos', value: 'lastname' },
-        { text: 'Empresa', value: 'company' },
-        { text: 'Telefono', value: 'phone_1' },
-        { text: 'Email', value: 'email' },
-        { text: 'Direccion', value: 'address_1' },
-        { text: 'Ciudad', value: 'city' },
-        { text: 'Provincia', value: 'state' },
-        { text: 'Fecha de registro', value: 'date_add' },
-        { text: 'X', value: 'actions', sortable: false },
+        
       ],
       customers: [],
       editedIndex: -1,
