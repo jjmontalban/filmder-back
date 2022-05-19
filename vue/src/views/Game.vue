@@ -1,48 +1,25 @@
 <template>
     <v-row class="text-center">
-        <tinder ref="tinder" key-name="id" :queue.sync="queue" :offset-y="10" @submit="onSubmit">
-            <template>
-                <div class="pic" :style="{
-                    'background-image': `url(https://themerex.net/wp-content/uploads/edd/2019/07/Rhodos-2.png)`
-                }"
-                />
+      <Tinder ref="tinder" class="col s4 m4" key-name="id" :queue.sync="queue" :offset-y="10" allow-down @submit="onSubmit">
+            <template slot-scope="movie">
+                <div class="pic" :style="{ 'background-image': `url(${movie.data.id})` }"/>
             </template>
             <img class="like-pointer" slot="like" src="../assets/like.png">
             <img class="nope-pointer" slot="nope" src="../assets/nope.png">
-            <img class="super-pointer" slot="super" src="../assets/super-like.png">
-        </tinder>
-    <div class="btns">
-      <img src="../assets/nope.png" @click="decide('nope')">
-      <img src="../assets/super-like.png" @click="decide('super')">
-      <img src="../assets/like.png" @click="decide('like')">
-    </div>
-
-<div class="col s4 m4" v-for="(post, index) in posts" :key="index">
-        <div class="card">
-          <div class="card-image">
-            <img
-              v-if="post._embedded['wp:featuredmedia']"
-              :src="post._embedded['wp:featuredmedia'][0].source_url"
-            />
-            <span class="card-title">{{ post.title.rendered }}</span>
-          </div>
-          <div class="card-content" v-html="post.excerpt.rendered"></div>
-          <div class="card-action">
-            <a href="#">{{ post.title.rendered }}</a>
-            <p>
-              <strong>Published: {{ getPostDate(post.date) }}</strong>
-            </p>
-          </div>
-        </div>
+            <img class="super-pointer" slot="super" src="../assets/super.png">
+            <img class="next-pointer" slot="next" src="../assets/next.png">
+      </Tinder>
+      <div class="btns">
+        <img src="../assets/nope.png" @click="decide('nope')">
+        <img src="../assets/super.png" @click="decide('super')">
+        <img src="../assets/next.png" @click="decide('rewind')">
+        <img src="../assets/like.png" @click="decide('like')">
       </div>
-
-
     </v-row>
 </template>
 
 <script>
 import Tinder from "vue-tinder";
-import source from "@/bing";
 import axios from "axios";
 
 export default {
@@ -50,51 +27,55 @@ export default {
   name: "Game",
   components: { Tinder },
   
-  data() {
-    return {
+    data: () => ({
       // Wordpress Posts Endpoint
-      postsUrl: "http://localhost/wp-vue/wordpress/wp-json/wp/v2/movies",
-      // Returned Posts in an Array
-      posts: [],
-      queue: [],
-      offset: 0,
-    };
-  },
+    moviesUrl: "http://localhost/wp-vue/wordpress/wp-json/wp/v2/movies",
+    queue: [],
+    movies: [],
+    offset: 0,
+    history: [],
+    total_pages: 0,
+    page_number: 0
+  }),
 
   created() {
     this.mock();
   },
 
-  mounted() {
-      this.initialize();
-  },
-
   methods: {
-        async initialize () {
-            axios
-            .get(this.postsUrl)
-            .then(response => {
-            this.posts = response.data;
-            //console.log(this.posts[0].movie_data['original_title']);
-            console.log(this.posts);
-            })
-            .catch(error => {
-            console.log(error);
-            });
-        },    
-        mock(count = 20) {
+
+       
+
+        mock(count = 10) {
         const list = [];
-        for (let i = 0; i < count; i++) {
-            list.push({ id: source[this.offset] });
-            this.offset++;
-        }
-        this.queue = this.queue.concat(list);
+        
+        axios
+            .get(this.moviesUrl)
+            .then(response => {
+                this.total_pages = response.headers['x-wp-totalpages'];
+                //get random page between all pages to start game
+                this.page_number = Math.floor(Math.random() * (this.total_pages - 1 + 1) ) + 1;
+                axios
+                      .get(this.moviesUrl + "?page=" + this.page_number)
+                      .then(response => {
+                                  this.movies = response.data;
+                                  for (let j = 0; j < count; j++) {
+                                        list.push({ id: this.movies[this.offset].movie_image });
+                                        this.offset++;
+                                  }
+                                  this.queue = this.queue.concat(list);
+                
+                            }).catch(error => { console.log(error); });
+                
+                  }).catch(error => { console.log(error); });
         },
+
         onSubmit({ item }) {
         if (this.queue.length < 3) {
             this.mock();
         }
         },
+
         decide (choice) {
         this.$refs.tinder.decide(choice)
         },
@@ -155,6 +136,18 @@ body {
   height: 164px;
 }
 
+.next-pointer {
+  position: absolute;
+  z-index: 1;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 164px;
+  height: 164px;
+}
+
+
 .pic {
   width: 100%;
   height: 100%;
@@ -184,11 +177,17 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.btns img:nth-child(2n + 1) {
+.btns img:nth-child(1n) {
+  width: 65px;
+}
+.btns img:nth-child(2n) {
+  width: 53px;
+}
+.btns img:nth-child(3n) {
   width: 53px;
 }
 
-.btns img:nth-child(2n) {
+.btns img:nth-child(4n) {
   width: 65px;
 }
 

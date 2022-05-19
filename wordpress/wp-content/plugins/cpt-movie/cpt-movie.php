@@ -236,14 +236,14 @@ add_action('rest_api_init', 'register_rest_movie_image' );
 function register_rest_movie_image()
 {
     register_rest_field( 'movie', 'movie_image',
-                            array( 'get_callback'    => 'get_rest_featured_image',
+                            array(
+                                    'get_callback'    => 'get_rest_featured_image',
         )
     );
 }
 
 function get_rest_featured_image( $object, $field_name, $request ) {
-    if( $object['featured_media'] )
-    {
+    if( $object['featured_media'] ){
         $img = wp_get_attachment_image_src( $object['featured_media'], 'app-thumb' );
         return $img[0];
     }
