@@ -1,19 +1,20 @@
 # Wordpress & Vue
 
-App Vue with Wordpress Backend. Plugin Wordpress + Custom Endpoints and extended WP API Rest
-
-* [Wordpress plugin](https://github.com/jjmontalban/wp-vue/blob/develop/wordpress/wp-content/plugins/ps_tables.php) for creating custom database table.
-* [Extending Wordpress Api REST](https://github.com/jjmontalban/wp-vue/blob/develop/wordpress/wp-content/themes/wp-vue/functions.php) for CRUD access for custom endpoint via Api.
-* [Vuetify datatable design apply](https://github.com/jjmontalban/wp-vue/blob/develop/vue/src/views/Crud.vue)
+Game to discover our Film Affinity created with Vue Front & Wordpress Backend (headless CMS). Plugin Wordpress + Custom Endpoints and extended WP API Rest
 
 ## Buid with 🛠️
 
-* [Vuejs](https://github.com/vuejs/vue) - Js Framework
-* [Vuetify](https://github.com/vuetifyjs/vuetify) - Material Design Framework
-* [Wordpress](https://wordpress.org/) - CMS
-* [Underscores](https://github.com/automattic/_s) - Wordpress Theme
 
-You can check a [Front Screenshot](https://prnt.sc/x4x3ol)
+
+* [Wordpress Plugins](https://github.com/jjmontalban/wp-vue/tree/master/wordpress/wp-content/plugins)
+  - Custom Post Type Movie extending WP Api Rest. Custom endpoint access via Api.
+  - Api Rest [TMDB]((https://developers.themoviedb.org/3/getting-started/introduction) to get Movies Information (more than 1,500 personal rating movies)
+
+* [Frontend App](https://github.com/jjmontalban/wp-vue/tree/master/vue). Created with:
+  - [Vuejs](https://github.com/vuejs/vue) - Js Framework
+  - [Vuetify](https://vuetifyjs.com/en/) - Material Design Framework
+  - [Vue Tinder](https://shanlh.github.io/vue-tinder/) - Awesome Vue Plugin
+ 
 
 
 ## License 📄
@@ -25,8 +26,6 @@ This project is open-sourced software licensed under [MIT License](https://opens
 
 * Star this project 📢 
 * just thank me 🤓
-
-
 
 ---
 Dev with ❤️ by [JJMontalban](https://jjmontalban.github.io) 😊
