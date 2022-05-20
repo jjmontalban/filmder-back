@@ -58,7 +58,7 @@ function get_tmdb_api_data()
     $params = array(
         'api_key' => 'b6ed96d048594e24a1b84f33f7244ce0',
         'account_id' => '5afda9dc0e0a267ec600010e',
-        'lan' => 'es-ES',
+        'lang' => 'es-ES',
         'session_id' => '594745b80089c5559b0e2cc4eb11278155c00e72',
         'sort_by' => 'created_at.asc'
     );
@@ -117,10 +117,24 @@ function get_tmdb_api_data()
     
                         if( $movie_id ) 
                         {
-                            // image
+                            // Get US poster
+                            $url_en = 'https://api.themoviedb.org/3/movie/' . $movie['id'] . 
+                                   '?api_key=' . $params['api_key'] . 
+                                   '&language=en-US';
+                            $response_en = wp_remote_get( $url_en );
+    
+                            if ( is_wp_error( $response_en ) ) {
+                                $error_message = $response_en->get_error_message();
+                                return "Something went wrong: $error_message";
+                            } 
+                               
+                            $body_en = wp_remote_retrieve_body( $response_en );		
+                            $movie_en = json_decode($body_en, true);		
+                            $movie['poster_path'] = $movie_en['poster_path'];
                             $url_img = 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'];
+    
                             generate_featured_image( $url_img, $movie_id );
-                            
+
                             add_post_meta( $movie_id, 'original_title', $movie['original_title'] );
                             add_post_meta( $movie_id, 'tmdb_id', $movie['id'] );
                             add_post_meta( $movie_id, 'release_date', $movie['release_date'] );

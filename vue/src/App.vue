@@ -31,8 +31,18 @@ export default {
 
 <style>
 
+@font-face {
+  font-family: "Jost-Regular";
+  src: local("Jost-Regular"),
+   url(./fonts/Jost-Regular.ttf) format("truetype");
+}
+
 *{
-    font-family: 'Jost', sans-serif;
+    font-family: 'Jost-Regular', sans-serif;
+}
+
+.quote {
+  font-style: italic;
 }
 
 </style>

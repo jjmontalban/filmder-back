@@ -1,18 +1,25 @@
 <template>
     <v-row class="text-center">
-      <Tinder ref="tinder" class="col s4 m4" key-name="id" :queue.sync="queue" :offset-y="10" allow-down @submit="onSubmit">
+      <Tinder ref="tinder" key-name="img" :queue.sync="queue" :offset-y="4" allow-down @submit="onSubmit">
+              
             <template slot-scope="movie">
-                <div class="pic" :style="{ 'background-image': `url(${movie.data.id})` }"/>
+                {{ movie.data.title }}
+                
+              <v-img
+                    :aspect-ratio="16/9" class="pic" 
+                    :style="{ 'background-image': `url(${movie.data.img})` }"/>
             </template>
-            <img class="like-pointer" slot="like" src="../assets/like.png">
+            
             <img class="nope-pointer" slot="nope" src="../assets/nope.png">
             <img class="super-pointer" slot="super" src="../assets/super.png">
-            <img class="next-pointer" slot="next" src="../assets/next.png">
+            <img class="down-pointer" slot="down" src="../assets/down.png">
+            <img class="like-pointer" slot="like" src="../assets/like.png">
+           
       </Tinder>
       <div class="btns">
         <img src="../assets/nope.png" @click="decide('nope')">
         <img src="../assets/super.png" @click="decide('super')">
-        <img src="../assets/next.png" @click="decide('rewind')">
+        <img src="../assets/down.png" @click="decide('down')">
         <img src="../assets/like.png" @click="decide('like')">
       </div>
     </v-row>
@@ -29,7 +36,7 @@ export default {
   
     data: () => ({
       // Wordpress Posts Endpoint
-    moviesUrl: "http://localhost/wp-vue/wordpress/wp-json/wp/v2/movies",
+    moviesUrl: "http://localhost/wp-vue/wordpress/wp-json/wp/v2/movies?per_page=3&orderby=rand",
     queue: [],
     movies: [],
     offset: 0,
@@ -46,28 +53,22 @@ export default {
 
        
 
-        mock(count = 10) {
+        mock(count = 3) {
         const list = [];
-        
+
         axios
-            .get(this.moviesUrl)
-            .then(response => {
-                this.total_pages = response.headers['x-wp-totalpages'];
-                //get random page between all pages to start game
-                this.page_number = Math.floor(Math.random() * (this.total_pages - 1 + 1) ) + 1;
-                axios
-                      .get(this.moviesUrl + "?page=" + this.page_number)
-                      .then(response => {
-                                  this.movies = response.data;
-                                  for (let j = 0; j < count; j++) {
-                                        list.push({ id: this.movies[this.offset].movie_image });
-                                        this.offset++;
-                                  }
-                                  this.queue = this.queue.concat(list);
-                
-                            }).catch(error => { console.log(error); });
-                
-                  }).catch(error => { console.log(error); });
+              .get(this.moviesUrl)
+              .then(response => {
+                          this.movies = response.data;
+                          for (let j = 0; j < count; j++) {
+                                list.push({ img: this.movies[this.offset].movie_image,
+                                            title: this.movies[this.offset].title.rendered,
+                                              });
+                                this.offset++;
+                          }
+                          this.queue = this.queue.concat(list);
+        
+                    }).catch(error => { console.log(error); });                
         },
 
         onSubmit({ item }) {
@@ -76,8 +77,16 @@ export default {
         }
         },
 
-        decide (choice) {
-        this.$refs.tinder.decide(choice)
+        async decide (choice) {
+                if (choice === "rewind") {
+                    if (this.history.length) {
+                      this.$refs.tinder.rewind([this.history.pop()]);
+                    }
+                } else if (choice === "help") {
+                    window.open("https://shanlh.github.io/vue-tinder");
+                } else {
+                    this.$refs.tinder.decide(choice);
+                }
         },
    },
 };
@@ -98,15 +107,16 @@ body {
 #app .vue-tinder {
   position: absolute;
   z-index: 1;
+  top: 1%;
   left: 0;
-  right: 0;
-  top: 23px;
+  right: 20px;
   margin: auto;
-  width: calc(100% - 20px);
-  height: calc(80% - 23px - 65px - 47px - 16px);
-  min-width: 300px;
-  max-width: 355px;
+  width:400px;
+  height: 600px;
 }
+
+.tinder-card { border-radius: 0px !important; }
+
 
 .nope-pointer,
 .like-pointer {
@@ -136,10 +146,10 @@ body {
   height: 164px;
 }
 
-.next-pointer {
+.down-pointer {
   position: absolute;
   z-index: 1;
-  bottom: 80px;
+  top: 8px;
   left: 0;
   right: 0;
   margin: auto;
@@ -156,12 +166,13 @@ body {
 }
 
 .btns {
+  z-index: 10;
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 30px;
+  bottom: 50px;
   margin: auto;
-  height: 300px;
+  height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
