@@ -1,7 +1,7 @@
 <template>
   <div class="text-center spacing-playground pa-6" fluid>
 
-    <v-btn  link exact :to="{ name: 'home' }" class="mx-2" fab x-large color="white">
+    <v-btn link exact :to="{ name: 'home' }" class="mx-2" fab x-large color="white">
         <v-img
             :src="require('../assets/pop-corn-icon.png')"
             class="my-3"

@@ -1,6 +1,6 @@
 <template>
     <v-row class="text-center">
-      <Tinder ref="tinder" key-name="img" :queue.sync="queue" :offset-y="4" allow-down @submit="onSubmit">
+      <Tinder ref="tinder" key-name="title" :queue.sync="queue" :offset-y="1" allow-down @submit="onSubmit">
               
             <template slot-scope="movie">
                 {{ movie.data.title }}
@@ -36,13 +36,14 @@ export default {
   
     data: () => ({
       // Wordpress Posts Endpoint
-    moviesUrl: "http://localhost/wp-vue/wordpress/wp-json/wp/v2/movies?per_page=3&orderby=rand",
+    moviesUrl: "http://localhost/wp-vue/wordpress/wp-json/wp/v2/movies?per_page=20&orderby=rand",
     queue: [],
     movies: [],
     offset: 0,
     history: [],
     total_pages: 0,
-    page_number: 0
+    page_number: 0, 
+    pos: 0,
   }),
 
   created() {
@@ -51,42 +52,50 @@ export default {
 
   methods: {
 
-       
-
-        mock(count = 3) {
+        mock(count = 20) {
         const list = [];
 
         axios
               .get(this.moviesUrl)
               .then(response => {
-                          this.movies = response.data;
-                          for (let j = 0; j < count; j++) {
-                                list.push({ img: this.movies[this.offset].movie_image,
-                                            title: this.movies[this.offset].title.rendered,
+                for (let j = 0; j < count; j++) {
+                  list.push({               img: response.data[this.offset].movie_image,
+                                            title: response.data[this.offset].title.rendered,
+                                            rating: response.data[this.offset].movie_data.rating[0],
+                                            original: response.data[this.offset].movie_data.original_title[0],
+                                            votes: response.data[this.offset].movie_data.vote_count[0],
+                                            vote_avg: response.data[this.offset].movie_data.vote_avg[0],
                                               });
                                 this.offset++;
                           }
                           this.queue = this.queue.concat(list);
-        
+                          this.movies = this.movies.concat(list);
+                          this.offset = 0;
+
                     }).catch(error => { console.log(error); });                
         },
 
-        onSubmit({ item }) {
-        if (this.queue.length < 3) {
-            this.mock();
-        }
+      onSubmit(item) {
+            if(this.queue.length == 0){  
+                this.$router.push('/result');
+                
+            }
+            if (item['type'] === "like") { 
+              this.movies[this.offset]['user_rating'] = 6; 
+            } 
+            else if(item['type'] === "nope") 
+            { 
+              this.movies[this.offset]['user_rating'] = 4; 
+            }
+            else if(item['type'] === "super") 
+            { 
+              this.movies[this.offset]['user_rating'] = 8; 
+            }
+            this.offset++;
         },
 
         async decide (choice) {
-                if (choice === "rewind") {
-                    if (this.history.length) {
-                      this.$refs.tinder.rewind([this.history.pop()]);
-                    }
-                } else if (choice === "help") {
-                    window.open("https://shanlh.github.io/vue-tinder");
-                } else {
-                    this.$refs.tinder.decide(choice);
-                }
+                this.$refs.tinder.decide(choice)
         },
    },
 };
