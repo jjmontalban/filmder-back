@@ -3,8 +3,8 @@
  * Plugin Name: REST API - Post list randomize
  * Description: Randomize the content list in REST API passing `orderby=rand` as parameter.
  * Version:     1.0.0
- * Author:      Felipe Elia | Codeable
- * Author URI:  https://codeable.io/developers/felipe-elia?ref=qGTOJ
+ * Author:      JJMontalban
+ * Author URI:  https://jjmontalban.github.io/
  */
 
 /**

@@ -20,7 +20,7 @@
  * @link https://decodecms.com/internacionalizar-plugin-wordpress/
  * .pot creation (wp-cli): "wp i18n make-pot . lang/cpt-movie.pot"
  */
-function jj_plugin_load_textdomain() {
+function jj_plugin_load_textdomain(){
     
     $text_domain	= 'cpt-movie';
 	$path_languages = basename(dirname(__FILE__)).'/lang/';

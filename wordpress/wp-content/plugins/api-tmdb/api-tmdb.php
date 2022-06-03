@@ -7,7 +7,7 @@
  * Author: JJ Montalban
  * Author URI: https://jjmontalban.github.io/
  * version: 0.1.0
- * License: GPL2 or later.
+ * License: GPL2 or later
  * text-domain: tmdb
  */
 
