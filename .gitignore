@@ -4,13 +4,7 @@
 
 
 ### Vuejs ###
-
 /vue/*
-!vue/src
-!vue/dist
-!/vue/package-lock.json
-!/vue/package.json
-
 
 ### WordPress ###
 
@@ -34,10 +28,9 @@
 /wordpress/wp-content/uploads/*
 /wordpress/wp-content/upgrade/*
 /wordpress/wp-content/themes/*
-!wordpress/wp-content/themes/wp-vue
+!wordpress/wp-content/themes/vuejs-wordpress-theme-starter/src
 /wordpress/wp-content/plugins/*
 !wordpress/wp-content/plugins/api-tmdb
 !wordpress/wp-content/plugins/cpt-movie
-!wordpress/wp-content/plugins/jwt-authentication-for-wp-rest-api
 !wordpress/wp-content/plugins/post-list-randomize
 
