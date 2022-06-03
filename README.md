@@ -1,20 +1,17 @@
-# Wordpress & Vue
+# Wordpress (backend Side)
 
-Game to discover our Film Affinity created with Vue Front & Wordpress Backend (headless CMS). Plugin Wordpress + Custom Endpoints and extended WP API Rest
+Game to discover our Film Affinity created with Vue (Front) & Wordpress (Back)  with headless system. Available in [Filmder](https://filmder.jjmontalban.com)
 
-## Buid with 🛠️
+Front side avaiable [here](https://github.com/jjmontalban/filmder-front) and deployed in [Heroku site](https://filmder-front.herokuapp.com)
 
 
 
-* [Wordpress Plugins](https://github.com/jjmontalban/wp-vue/tree/master/wordpress/wp-content/plugins)
-  - Custom Post Type Movie extending WP Api Rest. Custom endpoint access via Api.
-  - Api Rest [TMDB]((https://developers.themoviedb.org/3/getting-started/introduction) to get Movies Information (more than 1,500 personal rating movies)
+## backend Built with Wordpress 🛠️
 
-* [Frontend App](https://github.com/jjmontalban/wp-vue/tree/master/vue). Created with:
-  - [Vuejs](https://github.com/vuejs/vue) - Js Framework
-  - [Vuetify](https://vuetifyjs.com/en/) - Material Design Framework
-  - [Vue Tinder](https://shanlh.github.io/vue-tinder/) - Awesome Vue Plugin
- 
+  - [CPT Movie](https://github.com/jjmontalban/filmder-back/tree/master/wordpress/wp-content/plugins/cpt-movie) - Custom Post Type Creation (Movies) to display rating film information via Api Rest.
+  - [APi TMDB](https://github.com/jjmontalban/filmder-back/blob/master/wordpress/wp-content/plugins/api-tmdb/api-tmdb.php) - To get Movies Information (more than 1,500 personal rating movies) and store in Custom Post Movie.
+  - [Rand OrderBy](https://github.com/jjmontalban/filmder-back/blob/master/wordpress/wp-content/plugins/post-list-randomize/add_rand_orderby_restapi_post.php) - To get Movie Post in random mode.
+
 
 
 ## License 📄
